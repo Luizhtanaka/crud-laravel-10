@@ -61,9 +61,13 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $updated =   $this->user->where('id',$id)->update($request->except(['_token','_method']));
 
+        if($updated){
+            return redirect()->back()->with('message','Successfully update');
+        }
+        return redirect()->back()->with('message','Erro');
+    }
     /**
      * Remove the specified resource from storage.
      */
